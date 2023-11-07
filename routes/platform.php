@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use App\Orchid\Screens\Categories\CategoriesEditScreen;
+use App\Orchid\Screens\Categories\CategoriesListScreen;
 use App\Orchid\Screens\Examples\ExampleCardsScreen;
 use App\Orchid\Screens\Examples\ExampleChartsScreen;
 use App\Orchid\Screens\Examples\ExampleFieldsAdvancedScreen;
@@ -13,7 +15,11 @@ use App\Orchid\Screens\FAQs\FAQsEditScreen;
 use App\Orchid\Screens\FAQs\FAQsListScreen;
 use App\Orchid\Screens\News\NewsEditScreen;
 use App\Orchid\Screens\News\NewsListScreen;
+use App\Orchid\Screens\Orders\OrdersEditScreen;
+use App\Orchid\Screens\Orders\OrdersListScreen;
 use App\Orchid\Screens\PlatformScreen;
+use App\Orchid\Screens\Projects\ProjectsEditScreen;
+use App\Orchid\Screens\Projects\ProjectsListScreen;
 use App\Orchid\Screens\Role\RoleEditScreen;
 use App\Orchid\Screens\Role\RoleListScreen;
 use App\Orchid\Screens\User\UserEditScreen;
@@ -135,3 +141,50 @@ Route::screen('faq/{faq?}', FAQsEditScreen::class)
             ->push(__('Edit'), route('platform.faqs.faq'));
     });
 
+Route::screen('categories', CategoriesListScreen::class)
+    ->name('platform.categories')
+    ->breadcrumbs(function(Trail $trail){
+        return $trail
+            ->parent('platform.index')
+            ->push(_('Categories'), route('platform.categories'));
+    });
+
+    Route::screen('categories-edit/{categories?}', CategoriesEditScreen::class)
+    ->name('platform.categories.edit')
+    ->breadcrumbs(function(Trail $trail){
+        return $trail
+            ->parent('platform.categories')
+            ->push(_('Edit'), route('platform.categories.edit'));
+    });
+
+Route::screen('projects', ProjectsListScreen::class)
+    ->name('platform.projects')
+    ->breadcrumbs(function(Trail $trail){
+        return $trail
+            ->parent('platform.index')
+            ->push(_('Projects'), route('platform.projects'));
+    });
+
+Route::screen('projects-edit/{projects?}', ProjectsEditScreen::class)
+    ->name('platform.projects.edit')
+    ->breadcrumbs(function(Trail $trail){
+        return $trail
+            ->parent('platform.projects')
+            ->push(_('Edit'), route('platform.projects.edit'));
+    });
+
+Route::screen('orders', OrdersListScreen::class)
+    ->name('platform.orders')
+    ->breadcrumbs(function(Trail $trail){
+        return $trail
+            ->parent('platform.index')
+            ->push(_('Orders'), route('platform.orders'));
+    });
+
+Route::screen('orders-edit/{orders?}', OrdersEditScreen::class)
+    ->name('platform.orders.edit')
+    ->breadcrumbs(function(Trail $trail){
+        return $trail
+            ->parent('platform.orders')
+            ->push(_('Edit'), route('platform.orders.edit'));
+    });
